@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
     marginRight: 20,
+    marginTop: 18,
   },
   textContainer: {
     flex: 1,
