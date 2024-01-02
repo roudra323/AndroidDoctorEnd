@@ -8,6 +8,7 @@ import {
   ImageBackground,
   Modal,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import Wave from "../../assets/waveHome.png";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -21,7 +22,7 @@ const DoctorsScreen = ({ navigation }) => {
   const [doctorsData, setDoctorsData] = useState([]);
 
   const openEditModal = (doctorId) => {
-    const selected = doctorsData.find((doctor) => doctor.id === doctorId);
+    const selected = doctorsData.find((doctor) => doctor._id === doctorId);
     setSelectedDoctor(selected);
     setIsEditModalVisible(true);
   };
@@ -34,8 +35,8 @@ const DoctorsScreen = ({ navigation }) => {
   const fetchDoctors = async () => {
     await client.get(`/psychologist`).then((res) => {
       console.log("Doctor data before setDoctorsData", res.data);
-      setDoctorsData(res.data.user);
-      console.log("Doctor data after setDoctorsData", doctorsData);
+      setDoctorsData(res.data?.user);
+      // console.log("Doctor data after setDoctorsData", doctorsData);
     });
   };
 
@@ -60,13 +61,15 @@ const DoctorsScreen = ({ navigation }) => {
       </ImageBackground>
       <Text style={styles.headerText}>বিশেষজ্ঞদের তালিকা</Text>
       <View style={styles.doctorsContainer}>
+        {console.log("Doctor data in jsx", doctorsData)}
         {doctorsData &&
           doctorsData.map((doctor) => (
             <TouchableOpacity
-              onPress={() => openEditModal(doctor.id)}
-              key={doctor.id}
+              onPress={() => openEditModal(doctor._id)}
+              key={doctor._id}
             >
               <DoctorCard
+                key={doctor._id}
                 doctorInfo={doctor.name}
                 subText={doctor.email}
                 doctorImage={{
@@ -97,11 +100,21 @@ const DoctorsScreen = ({ navigation }) => {
             style={styles.closeIcon}
             onPress={closeEditModal}
           />
-          <Text>{selectedDoctor ? selectedDoctor.name : ""}</Text>
-          {/* Display other doctor information as needed */}
-          <TouchableOpacity onPress={closeEditModal}>
+          {selectedDoctor && (
+            <View>
+              <Image
+                source={{
+                  uri: `http://192.168.0.103:3000/image/${selectedDoctor.profilePicture}`,
+                }}
+                style={styles.doctorImage}
+              />
+              <Text style={styles.doctorName}>{selectedDoctor.name}</Text>
+              <Text style={styles.doctorAbout}>{selectedDoctor.about}</Text>
+            </View>
+          )}
+          {/* <TouchableOpacity onPress={closeEditModal}>
             <Text>Close Modal</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </Modal>
     </ScrollView>
@@ -138,14 +151,16 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 2,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    flexDirection: "row",
     borderWidth: 2.5,
     borderRadius: 10,
     marginHorizontal: 30,
     marginTop: 100,
     marginBottom: 200,
     backgroundColor: "white",
+    padding: 20, // Add padding to ensure content doesn't stick to the edges
   },
   modalInput: {
     width: 300,
@@ -156,6 +171,20 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     paddingHorizontal: 10,
     backgroundColor: "#fff",
+  },
+  doctorImage: {
+    width: 100, // Adjust as needed
+    height: 100, // Adjust as needed
+    borderRadius: 50, // Adjust as needed
+    marginRight: 10,
+  },
+  doctorName: {
+    fontSize: 20, // Adjust as needed
+    fontFamily: "HindiSiliBold",
+    marginBottom: 10,
+  },
+  doctorAbout: {
+    fontSize: 16, // Adjust as needed
   },
   buttonContainer: {
     flexDirection: "row",

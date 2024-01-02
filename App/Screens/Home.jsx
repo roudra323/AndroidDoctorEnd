@@ -71,7 +71,7 @@ const Home = ({ stuData }) => {
             <View
               style={styles.box}
               onStartShouldSetResponder={() =>
-                navigation.navigate("Form", { stuData: stuID })
+                navigation.navigate("Appointment")
               }
             >
               <MaterialCommunityIcons
@@ -79,7 +79,7 @@ const Home = ({ stuData }) => {
                 size={40}
                 color="black"
               />
-              <Text style={styles.boxText}>এপয়েন্টমেন্ট বুক</Text>
+              <Text style={styles.boxText}>এপয়েন্টমেন্টস</Text>
             </View>
 
             <View

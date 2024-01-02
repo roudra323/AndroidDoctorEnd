@@ -31,7 +31,11 @@ const Appointment = ({ navigation }) => {
     : [];
 
   const completedAppointments = appointmentArr
-    ? appointmentArr.filter((appointment) => appointment.status === "confirmed")
+    ? appointmentArr.filter(
+        (appointment) =>
+          appointment.status === "confirmed" &&
+          appointment.psychologistId === stuID
+      )
     : [];
 
   console.log(appointmentArr);

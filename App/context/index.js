@@ -10,6 +10,7 @@ export const GlobalProvider = ({ children }) => {
   const [data, setData] = useState(0); // [ {type: "success", message: "Appointment created successfully"}
   const [alert, setAlert] = useState({ on: false, type: "", message: "" });
   const [appointmentArr, setAppointmentArr] = useState([]);
+  const [articleData, setArticleData] = useState([]); // [ {type: "success", message: "Appointment created successfully"}
   console.log("Alert:", alert);
 
   const showAlert = (type, message) => {
@@ -37,6 +38,8 @@ export const GlobalProvider = ({ children }) => {
         appointmentArr,
         data,
         setData,
+        articleData,
+        setArticleData,
       }}
     >
       {console.log("Loaded")}

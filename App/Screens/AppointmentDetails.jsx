@@ -344,7 +344,9 @@ const AppointmentDetails = ({ route, navigation }) => {
 
     console.log("AppointmentDetails ID", appointmentDetails._id);
     await client
-      .post(`/appointment/appointmentId/status/${appointmentDetails?._id}`)
+      .post(`/appointment/appointmentId/status/${appointmentDetails?._id}`, {
+        psychologistId: user.user?._id,
+      })
       .then((res) => {
         setAlert({
           on: true,

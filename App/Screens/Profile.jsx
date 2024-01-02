@@ -39,12 +39,15 @@ const Profile = () => {
   const fieldOrder = [
     "name",
     "phone",
+    "email",
     "about",
+    "dept",
+    "batch",
     "presentAddress",
     "dob",
     "bloodGroup",
     "password",
-    "email",
+
     "date",
 
     // Add other fields as needed
