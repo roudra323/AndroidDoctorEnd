@@ -16,6 +16,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const Contact = () => {
   const navigation = useNavigation();
+
   const handlePress = useCallback(async () => {
     console.log("Calling...");
     // Open the custom settings if the app has one

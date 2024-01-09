@@ -25,7 +25,7 @@ const Expand = () => {
       <TouchableOpacity onPress={() => navigation.navigate("Article")}>
         <Text style={styles.expandedListItem}>Articles</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("Doctors")}>
+      <TouchableOpacity onPress={() => navigation.navigate("DoctorList")}>
         <Text style={styles.expandedListItem}>Phycatrists</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("Login")}>

@@ -13,6 +13,7 @@ import Recorder from "../Components/Recorder/Recorder";
 import Expand from "../Components/Recorder/Expand";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import Wave from "../../assets/waveHome.png";
@@ -68,19 +69,31 @@ const Home = ({ stuData }) => {
           </Text>
 
           <View style={styles.boxContainer}>
-            <View
-              style={styles.box}
-              onStartShouldSetResponder={() =>
-                navigation.navigate("Appointment")
-              }
-            >
-              <MaterialCommunityIcons
-                name="book-clock"
-                size={40}
-                color="black"
-              />
-              <Text style={styles.boxText}>এপয়েন্টমেন্টস</Text>
-            </View>
+            {user && user.user?.isSupperAdmin ? (
+              <View
+                style={styles.box}
+                onStartShouldSetResponder={() =>
+                  navigation.navigate("DoctorAdd")
+                }
+              >
+                <Entypo name="add-user" size={40} color="black" />
+                <Text style={styles.boxText}>বিশেষজ্ঞ এড</Text>
+              </View>
+            ) : (
+              <View
+                style={styles.box}
+                onStartShouldSetResponder={() =>
+                  navigation.navigate("Appointment")
+                }
+              >
+                <MaterialCommunityIcons
+                  name="book-clock"
+                  size={40}
+                  color="black"
+                />
+                <Text style={styles.boxText}>এপয়েন্টমেন্টস</Text>
+              </View>
+            )}
 
             <View
               style={styles.box}

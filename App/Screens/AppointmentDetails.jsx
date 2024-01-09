@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,6 +10,8 @@ import {
   Pressable,
 } from "react-native";
 import { useGlobalContext } from "../context";
+import * as Linking from "expo-linking";
+import { Feather } from "@expo/vector-icons";
 import Wave from "../../assets/waveHome.png";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
@@ -21,6 +23,11 @@ const AppointmentDetails = ({ route, navigation }) => {
   const { appointmentDetails, isDlt } = route.params;
   console.log("AppointmentDetails", appointmentDetails);
 
+  const handlePress = useCallback(async () => {
+    console.log("Calling...");
+    // Open the custom settings if the app has one
+    await Linking.openURL(`tel:+88${mobile}`);
+  }, []);
   const {
     user,
     setUser,
@@ -456,7 +463,12 @@ const AppointmentDetails = ({ route, navigation }) => {
           <Text style={styles.input}>{name}</Text>
 
           <Text style={getDynamicStyle("মোবাইল")}>মোবাইল</Text>
-          <Text style={styles.input}>{mobile}</Text>
+          <Pressable onPress={handlePress}>
+            <View style={[styles.inputContainer, styles.input]}>
+              <Text>{mobile}</Text>
+              <Feather name="phone" size={24} color="black" />
+            </View>
+          </Pressable>
 
           <Text style={getDynamicStyle("বয়স")}>বয়স</Text>
           <Text style={styles.input}>{age}</Text>
@@ -588,6 +600,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 3,
     backgroundColor: "green",
+  },
+  inputContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center", // if you want to align them vertically
+    paddingHorizontal: 7,
   },
   text: {
     fontSize: 16,

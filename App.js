@@ -16,6 +16,7 @@ import Contact from "./App/Screens/Contact";
 import { GlobalProvider } from "./App/context";
 import AppointmentDetails from "./App/Screens/AppointmentDetails";
 import ArticleScreen from "./App/Components/ArticleScreen";
+import DoctorAdd from "./App/Screens/DoctorAdd";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -117,6 +118,15 @@ export default function App() {
           <Stack.Screen
             name="ArticleScreen"
             component={ArticleScreen}
+            options={{
+              headerStyle: { backgroundColor: "#fff" },
+              headerShadowVisible: false,
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="DoctorAdd"
+            component={DoctorAdd}
             options={{
               headerStyle: { backgroundColor: "#fff" },
               headerShadowVisible: false,
