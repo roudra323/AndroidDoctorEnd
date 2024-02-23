@@ -23,11 +23,17 @@ const AppointmentDetails = ({ route, navigation }) => {
   const { appointmentDetails, isDlt } = route.params;
   console.log("AppointmentDetails", appointmentDetails);
 
-  const handlePress = useCallback(async () => {
+  const [userDataFetched, setUserDataFetched] = useState(false);
+
+  const handlePress = async (mb) => {
     console.log("Calling...");
     // Open the custom settings if the app has one
-    await Linking.openURL(`tel:+88${mobile}`);
-  }, []);
+    console.log(typeof mb);
+    await Linking.openURL(`tel:+88${mb}`);
+    // await Linking.openURL(`tel:01625780323`);
+    console.log(mb);
+  };
+
   const {
     user,
     setUser,
@@ -380,7 +386,8 @@ const AppointmentDetails = ({ route, navigation }) => {
     setAge(appointmentDetails?.age);
     setEmail(appointmentDetails?.email);
     setAddress(appointmentDetails?.address);
-    setDate(appointmentDetails?.date); // Set the date to the current date
+    setDate(appointmentDetails?.date);
+    setUserDataFetched(true);
   };
 
   const getDynamicStyle = (text) => {
@@ -421,6 +428,13 @@ const AppointmentDetails = ({ route, navigation }) => {
   useEffect(() => {
     fetchUser();
   }, []);
+
+  useEffect(() => {
+    // Print mobile value only when user data is fetched
+    if (userDataFetched) {
+      console.log("Mobile:", mobile);
+    }
+  }, [mobile, userDataFetched]);
 
   return (
     <ScrollView style={styles.container}>
@@ -463,7 +477,7 @@ const AppointmentDetails = ({ route, navigation }) => {
           <Text style={styles.input}>{name}</Text>
 
           <Text style={getDynamicStyle("মোবাইল")}>মোবাইল</Text>
-          <Pressable onPress={handlePress}>
+          <Pressable onPress={() => handlePress(mobile)}>
             <View style={[styles.inputContainer, styles.input]}>
               <Text>{mobile}</Text>
               <Feather name="phone" size={24} color="black" />

@@ -73,7 +73,7 @@ const DoctorsScreen = ({ navigation }) => {
                 doctorInfo={doctor.name}
                 subText={doctor.email}
                 doctorImage={{
-                  uri: `http://192.168.0.103:3000/image/${doctor?.profilePicture}`,
+                  uri: `${process.env.EXPO_PUBLIC_API_URL}/image/${doctor?.profilePicture}`,
                 }}
               />
               {/* <Image
