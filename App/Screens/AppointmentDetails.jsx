@@ -324,35 +324,6 @@ const AppointmentDetails = ({ route, navigation }) => {
   console.log(problems);
 
   const handleSubmit = async () => {
-    // const formData = {
-    //   name,
-    //   department,
-    //   mobile,
-    //   age,
-    //   email,
-    //   address,
-    //   date,
-    //   takenBefore,
-    //   heradAboutUs: heradAboutUs
-    //     .filter((source) => source.checked)
-    //     .map((source) => source.name),
-    //   problems: problems
-    //     .filter((problem) => problem.checked)
-    //     .map((problem) =>
-    //       problem.name === "অন্যান্য" ? otherProblem : problem.name
-    //     ),
-    //   counselingType: counselingType
-    //     .filter((type) => type.checked)
-    //     .map((type) => type.type),
-    //   counselingTime: counselingTime
-    //     .filter((time) => time.checked)
-    //     .map((time) => time.time),
-    //   counselingDay: counselingDay
-    //     .filter((day) => day.checked)
-    //     .map((day) => day.day),
-    // };
-    // console.log(JSON.stringify(formData));
-
     //submit to server
 
     console.log("AppointmentDetails ID", appointmentDetails._id);
