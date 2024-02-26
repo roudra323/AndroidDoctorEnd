@@ -8,6 +8,7 @@ import {
   ImageBackground,
   ScrollView,
   Alert,
+  RefreshControl,
 } from "react-native";
 import Recorder from "../Components/Recorder/Recorder";
 import Expand from "../Components/Recorder/Expand";
@@ -23,6 +24,7 @@ import { useGlobalContext } from "../context";
 import client from "../api/client";
 
 const Home = ({ stuData }) => {
+  const [refreshing, setRefreshing] = React.useState(false);
   const { user, appointmentArr, setAppointmentArr, data } = useGlobalContext();
   const stuID = user.user._id;
   const navigation = useNavigation();
@@ -49,12 +51,24 @@ const Home = ({ stuData }) => {
     fetchAppointment();
   }, [data]);
 
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
+
   const pendingAppointments = appointmentArr
     ? appointmentArr.filter((appointment) => appointment.status === "pending")
     : [];
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <View>
         <ImageBackground source={Wave} style={styles.image}>
           <View style={styles.header}>
@@ -83,7 +97,7 @@ const Home = ({ stuData }) => {
               <View
                 style={styles.box}
                 onStartShouldSetResponder={() =>
-                  navigation.navigate("Appointment")
+                  navigation.navigate("আপয়েন্টমেন্ট")
                 }
               >
                 <MaterialCommunityIcons

@@ -96,7 +96,7 @@ const DoctorsScreen = ({ navigation }) => {
           <Entypo
             name="circle-with-cross"
             size={24}
-            color="black"
+            color="red"
             style={styles.closeIcon}
             onPress={closeEditModal}
           />

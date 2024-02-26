@@ -16,10 +16,10 @@ const Expand = () => {
       style={styles.expandedList}
       contentContainerStyle={styles.expandedListContent}
     >
-      <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+      <TouchableOpacity onPress={() => navigation.navigate("হোম")}>
         <Text style={styles.expandedListItem}>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("Appointment")}>
+      <TouchableOpacity onPress={() => navigation.navigate("আপয়েন্টমেন্ট")}>
         <Text style={styles.expandedListItem}>Appointment</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("Article")}>
